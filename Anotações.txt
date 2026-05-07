@@ -1,0 +1,19 @@
+ansible-galaxy = hub do ansible, com collections e roles, similar ao docker hub.
+ansible-doc = documentação via cli (aqui plug in = módulo), no final de cada módulo existem exemplos!!!
+comandos ad-hoc, comandos que executam alguma ação apenas uma única vez, não são idepotentes como playbooks
+ansible-inventory = apresenta informações sobre o inventario -h 
+ansible-vault = responsavel por criptografar e descriptografar dados sensiveis
+ex: ansible-vault encrypt passwd.yml, escolhe a senha de criptografia 
+ansible-vault create passwd.yml (em caso de um arquivo novo)
+ansible-vault view passwd.yml, para mostrar o conteudo criptografado (vai pedir a senha de criptografia)
+--ask-vault-passowrd, opção para rodar a playbook com alguma informação criptografada
+parametro rekey, altera a senha de criptografia
+ansible-console = console
+
+#IMPORTANTE
+Conexão SSH com os hosts
+
+Criar as chaves publica e privada na sua maquina com o ssh keygen
+copiar a chave publica para os hosts = ssh-copy-id -i "ansible-key"(chave publica) "stephan@192.168.1.100" -> nome do host
+depois para conectar no host sem ficar pedindo senha -> ssh -i "ansible-key"(chave privada) stephan@192.168.1.100
+É necessário alterar o arquivo config dentro da pasta ssh e colocar la um novo IdentityFile com o caminho da ansible-key

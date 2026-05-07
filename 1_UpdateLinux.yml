@@ -1,0 +1,31 @@
+# Atualiza todos os pacotes instalados no sistema operacional para a versão mais recente.
+--- # indica o início de um documento YAML
+
+- name: Update Rocky Linux Servers - Starting Deploy
+  hosts: rocky01
+  tasks:
+   - name: DNF | Update System
+     ansible.builtin.dnf: # nome da colection.nome do módulo
+       name: "*"
+       state: latest
+       update_cache: yes
+
+- name: Update Debian Linux Servers - Starting Deploy
+  hosts: debian01
+  tasks:
+   - name: Debian Like | Update System
+     ansible.builtin.apt: name="*"" state = latest # nesse formato ficam todas as configs na mesma linha
+
+... # indica o final de um documento YAML (raramente usado em playbooks)
+# ansible collections = coleção de plug-ins, modulos, playbooks e etc...
+# as collections por padrão ficam em /home/user/.ansible/collections/ansible_collections
+# se utiliza o comando ansible-galaxy collection -h para gerenciar as colections, use o list para mostrara as opções e o install para instalar (talvez precise do --force se for uma collection antiga)
+# se durante a instalação se utilizar o parametro -p, é possível escolher o diretório da instalação
+
+# ansible-playbook [argumentos] [playbook] (-h também funciona)
+# ex: ansible-playbook -i inventory/hosts -l ou --limit debian01
+# -b = become = como se fosse com sudo na frente (elevação de privilégio)
+# --syntax-check (verifica erros de sintaxe na playbook), --list-hosts (mostra quais targets são impactados pela playbook), --list-tasks
+# ansible-doc -l (lista todos os modulos), ansible-doc (nome do módulo) = descreve o módulo todo
+
+# IDEPOTENTE = não executa tarefas repetidas que ja foram executadas antes.

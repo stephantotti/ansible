@@ -1,0 +1,20 @@
+# Controla o comportamento do loop — adiciona pausa entre iterações, renomeia a variável padrão ou personaliza o output. O pause evita sobrecarregar o sistema durante operações pesadas.
+---
+
+- name: Ansible Loop Control
+  hosts: rocky01
+  tasks:
+    - name: DNF | Install Packages 
+      ansible.builtin.dnf:
+        name: "{{ item }}"
+        state: latest
+      loop: 
+        - vim
+        - net-tools
+        - screen
+      loop_control:
+        pause: 5
+
+...
+
+# se digitar 'time' antes do comando para rodar a playbook, ele mostra o tempo do pause 

@@ -1,0 +1,10 @@
+---
+
+- hosts: localhost
+  remote_user: root
+  roles:
+    - Exemplo-Role
+...
+
+# diretorio de testes
+# se usa localhost no comando para testar localmente

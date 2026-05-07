@@ -1,0 +1,19 @@
+# Loop com objetos que têm múltiplos atributos. Permite iterar sobre itens complexos passando várias propriedades para cada iteração.
+---
+
+- name: Ansible Loop
+  hosts: rocky01
+  tasks:
+    - name: USER | Add User 
+      ansible.builtin.user:
+        name: "{{ item.name }}" #  item é variavel padrão, que busca os itens dentro do Loop
+        state: present
+        comment: "{{ item.comment }}"
+        groups: "wheel"
+        shell: "{{ item.shell }}"
+      loop:
+        - { name: 'eddie', comment: 'Van Halen', shell: '/bin/bash' }
+        - { name: 'dime', comment: 'Pantera', shell: '/bin/bash' }
+        - { name: 'taylor', comment: 'Foo Fighters', shell: '/bin/sh' }
+        
+...

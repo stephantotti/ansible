@@ -1,0 +1,20 @@
+---
+
+- name: Main Playbook
+  hosts: all
+  roles:
+    - linux-update # são executadas na ordem da lista, mas não cria uma dependencia entre as roles, para isso é necessario utilizar as dependencias do meta na role
+    - temp
+...
+
+# pode-se passar as roles no seguinte formato:
+# roles:
+#   - role: '/tmp/linux-update' 
+#     vars:
+#       http_port: 8080
+#       username: stephan
+#     tags:
+#       - abc 
+# dessa forma é possível customizar a role
+
+# Roles são conjuntos reutilizáveis de tasks, variáveis e arquivos organizados em uma estrutura padrão. A playbook central chama as roles na ordem definida, separando responsabilidades e facilitando reuso em múltiplos projetos.

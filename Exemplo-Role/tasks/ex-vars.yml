@@ -1,0 +1,8 @@
+---
+
+- name: DNF | Install {{ Packages}}
+  ansible.builtin.yum:
+    name: "{{ packages }}"
+    state: latest
+
+...

@@ -1,0 +1,14 @@
+# Variáveis passadas no momento da execução do comando. Útil para valores dinâmicos que mudam a cada execução sem precisar editar a playbook.
+---
+
+- name: Variables in Runtime
+  hosts: rocky01
+  tasks:
+    - name: DEBUG | Variables in Runtime
+      ansible.builtin.debug:
+        msg: "{{ message }}"
+
+...
+
+# primeiro se digita o comando para adicionar a variavel, ou o ansible apresentará erro
+# ansible-playbook -i inventory/hosts -l "-l = limit" rocky01 --extra-vars message="OI" playbooks/6_VarsRunTime.yml

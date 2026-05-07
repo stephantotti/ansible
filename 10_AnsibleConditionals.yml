@@ -1,0 +1,25 @@
+# Condicionais permitem controlar quais tasks serão executadas baseado em condições — usando when com facts do host, variáveis, resultados de tasks anteriores, ou combinações com and/or. Permite que uma única playbook tome decisões e se comporte de forma diferente dependendo do ambiente, sistema operacional ou estado do servidor.
+---
+
+- name: Ansible Conditionals (when)
+  hosts: all
+  tasks:
+    - name: DNF | Update Systems
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
+        update_cache: yes
+      when: ansible_hostname == "rocky01" or ansible_distribution == "Rocky" # essas variaveis são saídas do ansible facts e a condição pode variar entre or ou and
+
+    - name: APT | Update Cache 
+      ansible.builtin.apt:
+        update_cache: yes
+      when: ansible_distribution == "Debian" 
+
+    - name: APT | Update Systems 
+      ansible.builtin.apt:
+        name: "*"
+        state: latest
+      when: ansible_distribution == "Debian" 
+
+...

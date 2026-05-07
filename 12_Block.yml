@@ -1,0 +1,25 @@
+# Agrupa tasks em um bloco com tratamento de erro. O rescue roda se algo falhar, o always roda independente do resultado — similar ao try/catch/finally de linguagens de programação.
+---
+
+- name: Block Testing 
+  hosts: 
+  tasks: 
+    - block:
+        - ansible.builtin.debug:
+            msg: "#### EXECUTADO NORMALMENTE ####"
+        - name: Simulando Erros 
+          ansible.builtin.shell: ./configure
+          args: 
+            chdir: /tmp
+        - ansible.builtin.debug: 
+            msg: "NUNCA SERA EXECUTADO"
+      rescue: # rescue = || no linux
+      - ansible.builtin.debug:
+          msg: "ERROR - FALHA NO TARGET {{ inventory_hostname }}"
+      always: # always = ; no linux
+      - name: SISOP | Update System 
+        ansible.builtin.dnf: name=* state=latest
+
+...
+
+#executar um bloco ou outro em caso de falha ou sucesso no bloco principal!

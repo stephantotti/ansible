@@ -1,0 +1,12 @@
+---
+
+packages:
+  - tcpdump
+
+...
+# defaults file for Exemplo-Role
+# uma playbook pode chamar uma role, uma role não pode chamar uma playbook
+# local onde se armazenam variaveis simples
+# ansible-galaxy init "nome da role" já cria toda a estrutura
+# geralmente roles se usa em automações mais complexas (todas as ações separadas), playbooks em automações mais simples
+# É uma boa prática ter uma playbook central que chama as roles, e se comenta as roles que não serão utilizadas naquela automação

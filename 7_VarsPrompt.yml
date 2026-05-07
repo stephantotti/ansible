@@ -1,0 +1,31 @@
+# Solicita valores ao operador durante a execução. Útil para dados sensíveis como senhas que não devem ficar gravados em arquivos.
+---
+
+- name: Ansible Prompt | Creating User on Linux
+  hosts: all
+  vars_prompt:
+    - name: username
+      prompt: What is your username?
+      private: false
+    - name:
+      prompt: What is your password?
+      private: true # opcional - default=true
+      encrypt: "md5_crypt" # requer passlib
+      confirm: yes
+      salt_size: 7 # quantidade de dados randomicos usados como entrada de uma função hash para garantir um resultado único
+    - name: shell
+      prompt: what is your shell? # R: /bin/bash/
+      private: false
+  tasks:
+    - name: Print a message
+      ansible.builtin.debug:
+        msg: 'Usuario: {{ username }} | Password: {{ password }} | Shell: {{ shell }}'
+    - name: USER | add user 
+      ansible.builtin.user:
+        name: "{{ username }}"
+        comment: User created by ansible
+        shell: "{{ shell }}"
+        home: "/home/{{ username }}"
+        password: "{{ password }}"
+
+...

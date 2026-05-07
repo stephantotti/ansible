@@ -1,0 +1,19 @@
+# Captura e armazena o resultado de uma task em uma variável para uso posterior. Útil para tomar decisões baseadas na saída de um comando.
+---
+
+- name: Ansible Register
+  hosts: all
+  tasks:
+    - name: SISOP | Find Files 
+      find:
+        path: /tmp 
+        patterns: '*.cfg' # regex
+      register: output # variavel 
+
+    - name: SISOP | Show Files 
+      debug:
+        msg: "{{ output }}" 
+
+...
+
+# parse ou data parse = converter dados de um formato para outro

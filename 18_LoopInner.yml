@@ -1,0 +1,34 @@
+# Loop aninhado — para cada item do loop externo, todos os itens do loop interno são executados. Útil para combinações de valores, como aplicar N configurações em N servidores.
+---
+
+- name: Anslible Inner Loop
+  hosts: rocky01
+  tasks: 
+    - include_tasks: inner.yml # roda uma task dentro de um arquivo
+      loop: # existe o parametro include_role
+       - 1
+       - 2
+       - 3
+      loop_control: 
+        loop_var: outer_item
+
+...
+
+
+# conteúdo do arquivo
+#---
+
+#- name: Print Outter and Inner Items  # não é uma playbook, apenas uma tarefa!
+#  debug: 
+#    msg: "outer item={{ outer_item }}" inner item={{ item }}
+#  loop:
+#   - a
+#   - b
+#   - c
+
+#...
+
+# a saída será
+# a1, a2, a3
+# b1, b2, b3
+# c1, c2, c3

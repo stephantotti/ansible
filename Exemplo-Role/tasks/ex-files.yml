@@ -1,0 +1,15 @@
+---
+
+- name: SYSTEM | Copy Files 
+  ansible.builtin.copy: src={{ item.src }} dest= {{ item.dest }} # sem aspas por que se usou o = # máquina de origem => maquina de destino
+  with_items:
+    - { src: '/tmp/file1.conf', dest: '/tmp/file1.conf' }
+    - { src: '/tmp/file2.conf', dest: '/tmp/file2.conf' }
+    - { src: '/tmp/file3.conf', dest: '/tmp/file3.conf' }
+
+- name: SYSTEM | Extract Files
+  unarchive: 
+    src: file.tar.gz
+    dest: /tmp
+
+...

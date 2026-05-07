@@ -1,0 +1,17 @@
+# Loop simples que repete uma task para cada item de uma lista. Evita duplicar tasks que fazem a mesma coisa para valores diferentes.
+---
+
+- name: Ansible Loop
+  hosts: rocky01
+  tasks:
+    - name: USER | Add User 
+      ansible.builtin.user:
+        name: "{{ item }}" # variavel padrão, que busca os itens dentro do Loop
+        state: present
+        groups: "wheel"
+      loop:
+        - eddie
+        - dime
+        - taylor
+        
+...

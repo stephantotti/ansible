@@ -1,0 +1,13 @@
+---
+
+- name: SSHD |Copy sshd_config template 
+  ansible.builtin.template:
+    src: sshd_config.j2 # j2 = jinja2, formato que o ansible reconhece informações do ansible facts
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes # sempre recomendavel
+  notify: Restart sshd 
+
+...

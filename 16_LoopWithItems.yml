@@ -1,0 +1,14 @@
+# with_items é a forma antiga de loop — faz a mesma coisa que o loop mas é a sintaxe legada. Ainda muito encontrado em playbooks antigas.
+---
+
+- name: Ansible With Items
+  hosts: rocky01
+  tasks:
+    - name: SYSTEM | Copy Files 
+      ansible.builtin.copy: src={{ item.src }} dest= {{ item.dest }} # sem aspas por que se usou o = # máquina de origem => maquina de destino
+      with_items:
+        - { src: '/tmp/file1.txt', dest: '/tmp/file1.txt' }
+        - { src: '/tmp/file2.txt', dest: '/tmp/file2.txt' }
+        - { src: '/tmp/file3.txt', dest: '/tmp/file3.txt' }
+
+...

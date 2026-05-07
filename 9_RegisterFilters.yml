@@ -1,0 +1,19 @@
+# Filtra e transforma a saída capturada pelo register. Permite extrair apenas os dados relevantes de um resultado complexo.
+---
+
+- name: Ansible Register Filter
+  hosts: all
+  tasks:
+    - name: SISOP | Find Files 
+      find:
+        path: /tmp 
+        patterns: '*.cfg' # regex
+      register: output # variavel 
+
+    - name: SISOP | Show Files 
+      debug:
+        msg: "{{ output.files | map(attribute='path') | list }}" # necessário verificar se é atributo ou variavel (aparece na mensagem de erro)
+# por padrão, sempre o retorno é uma lista, mesmo sem especificar, mas podemos usar os parametros first, last ou sort, que serão organizadas as saídas de acordo com a data de criação
+        register: result # salvar a saída em outra variavel
+        
+...

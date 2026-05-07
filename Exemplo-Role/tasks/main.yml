@@ -1,0 +1,14 @@
+---
+
+- name: Rocky | Update System  
+  import_tasks: rocky.yml
+  when: ansible_distribution == "Rocky" 
+
+- name: Debian | Update System  
+  import_tasks: debian.yml
+  when: ansible_distribution == "Debian" 
+
+...
+
+# tasks file for Exemplo-Role
+# tasks é o único diretório obrigatório em uma role, o resto é opcional

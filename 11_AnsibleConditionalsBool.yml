@@ -1,0 +1,20 @@
+# Condicionais baseadas em valores booleanos (true/false). Permite ativar ou desativar comportamentos da playbook através de variáveis de controle.
+---
+
+- name: Ansible Conditionals Bool
+  hosts: rocky01 
+  vars:
+    backup: true
+    snapshot: false # snapshot não é backup!!!
+  tasks:
+    - name: Run the Task if 'backup' is true
+      ansible.builtin.debug: 
+        msg: "Congratulations"
+      when: backup | bool # o default é true
+
+    - name: Run the Task if 'backup' is false
+      ansible.builtin.debug:
+        msg: "Critical, Make a Backup" 
+      when: not backup 
+
+...

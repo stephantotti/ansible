@@ -1,0 +1,25 @@
+# Executa uma ação apenas quando uma task causa mudança no sistema. Se nada mudou, o handler não roda — evita reiniciar serviços desnecessariamente.
+---
+
+- name: Ansible Handlers
+  hosts: rocky01
+  tasks: 
+    - name: NGINX | Change Listener
+      ansible.builtin.replace:
+        dest: /etc/nginx/nginx.conf
+        regexp: 'listen        80 default_server;'
+        replace: 'listen         {{ ansible_default_ipv4.address }}:80 default_server;'
+      notify: Restart Nginx # 1 = precisam ter o mesmo nome
+
+  handlers: 
+    - name: Restart Nginx # 1
+      ansible.builtin.systemd:
+        name: nginx 
+        state: restarted 
+        enabled: yes   
+
+...
+
+# Exemplo de como reiniciar um systema para aplicar uma configuração (nginx)
+# o Handlers server para realizar uma ação após a aplicação de uma task da playbook
+# só é executado caso tenha ocorrido a mudança

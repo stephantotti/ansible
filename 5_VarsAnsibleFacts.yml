@@ -1,0 +1,14 @@
+# Facts são variáveis coletadas automaticamente pelo Ansible sobre o host — IP, MAC, SO, memória, etc. Útil para tomar decisões baseadas nas características do servidor.
+---
+
+- name: Ansible Facts Vars 
+  hosts: rocky01
+  tasks:
+    - name: DEBUG | Ansible Facts
+      ansible.builtin.debug:
+        msg: "{{ ansible_default_ipv4.macaddress }}" 
+
+...
+
+# ansible -i inventory/hosts rocky01 -m setup | less (comando para coletar os ansible facts do host escolhido)
+# o módulo debug serve para exibir informações ao executar uma playbook

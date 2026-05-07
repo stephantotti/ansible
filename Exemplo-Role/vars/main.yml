@@ -1,0 +1,9 @@
+---
+
+packages:
+  - mariadb
+
+...
+# vars file for Exemplo-Role
+# onde se armazenam as principais variaveis da role
+# variaveis aqui tem prioridade em relação as variaveis default

@@ -1,0 +1,30 @@
+...
+
+bandas: # lista & exemplo de variavel
+  - "Silverchair"
+  - "Slipknot"  
+  - "Avenged Sevenfold" 
+  - "Rage Against The Machine"
+  - "Offspring"
+
+cadastro: # mapas
+  nome: Stephan
+  sobrenome: Kotarski
+  idade: 39
+  endereço: 
+    cidade: Londrina
+    estado: Parana
+    rua: "Carlos Gil"
+  bandas-preferidas: "{{ bandas }}" # chamando a variavel
+
+...
+
+# YAML Validators = Yaml Lint
+# No linux é uma boa pratica elevar privilégios do usuário que vai realizar as automações,
+# pois na automação será necessário digitar senha para elevar privilégios e senhas de acesso.
+# recomendado instalar o ansible via pip
+# caso precise utilizar o ansible.cfg no diretório corrente, certifique-se que o mesmo só possua permissões para usuário e grupos autorizados (leitura e escrita)
+# comandos ad-hoc = usado para comandos que não se usa repetidamente! todo comando ad hoc precisa do parametro -m = modulo ... ansible --help
+# padrão = ansible -i (hosts) -u (user) -p (senha ou troca de chaves ssh) -m modulo
+# ansible-doc consulta a descrição de um modulo específico
+# ansible facts, busca de variaveis (facts) em hosts, ansible all -m setup (sempre se usa o parametro setup) -a "variavel"

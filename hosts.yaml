@@ -1,0 +1,46 @@
+all:
+  hosts:
+  children:     
+    debian:     #grupos
+      hosts:
+      192.168.1.101:
+    redhat:     #grupos
+      hosts:
+      192.168.1.100:
+    linux:      #subgrupos
+      children:
+        debian:
+        redhat:
+
+# ex: ansible linux -m ping
+
+#segunda forma
+# [debian]
+# 192.168.[0:1].[101:110]: Ex: range de hosts
+# servidor[01:05] Ex: dns
+
+# variávies
+# [debian]
+# debian01 (caso tenha dns) ansible_host=192.168.1.101 ansible_user=stephan ansible_port=22 ansible_ssh_port=22
+# ansible debian01 -m ping
+# ou
+# [debian:vars]
+# ansible_port=22
+# ansible_user=stephan
+# http=8080 pode-se usar variáveis não nativas do ansible 
+# na raiz do ansible, é possível criar 2 diretórios, group_vars e host_vars, e configurar as variáveis criando arquivos dentro deles
+# ansible debian01 --extra-vars jogador=stephan, forma de adicionar variáveis por linha de comando
+# prioridade da busca por variáveis = hosts, grupos, filhos de grupos, grupo all...
+# mas depende também da forma que as variáveis foram alimentadas, prioridade é primeiro via linha de comando, depois no arquivo host_vars e por último no arquivo de inventário
+# no curso tem um exemplo montado de um inventário dinâmico com uso em ambiente aws!
+
+# [redhat]
+# 192.168.1.100:
+
+# [linux:children]
+# redhat
+# debian
+
+#/etc/ansible/hosts
+
+# variáveis no ansible se configura geralmente utilizando chave=valor, e as vezes chave: valor se for em yaml

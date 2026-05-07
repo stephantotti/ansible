@@ -1,0 +1,23 @@
+# Coleta informações sobre arquivos e diretórios — existência, permissões, proprietário, tamanho. Permite tomar decisões baseadas no estado atual dos arquivos no host.
+---
+
+- name: Ansible Stat 
+  hosts: rocky01 
+  tasks: 
+    - name: SISOP | Verificando se o arquivo existe 
+      ansible.builtin.stat: path=/tmp/ansible.cfg 
+      register: file 
+
+    - debug:
+        msg: "File Found" 
+      when: file.stat.exists 
+
+    - debug:
+        msg: "File not Found" 
+      when: file.stat.exists == false 
+
+    - debug:
+        msg: "Ownership has Changed"  
+      when: file.stat.pw_name != stephan # ansible-doc stat para descobrir parametros como o pw_name
+
+...
